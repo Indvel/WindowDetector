@@ -33,12 +33,6 @@ Public Class Form1
 
     Declare Function GetWindowRect Lib "user32" Alias "GetWindowRect" (ByVal hwnd As Integer, ByRef lpRect As RECT) As Integer
 
-    Declare Function GetClientRect Lib "user32" Alias "GetClientRect" (ByVal hwnd As Integer, ByRef lpRect As RECT) As Integer
-
-    <DllImport("user32.dll", SetLastError:=False)>
-    Private Shared Function GetDesktopWindow() As IntPtr
-    End Function
-
     Public Overloads Declare Function InvalidateRect Lib "User32" Alias "InvalidateRect" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
 
     Dim hwnd As IntPtr
