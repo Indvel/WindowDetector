@@ -39,14 +39,6 @@ Public Class Form1
     Private Shared Function GetDesktopWindow() As IntPtr
     End Function
 
-    <DllImport("user32.dll")>
-    Public Shared Function GetDC(ByVal hwnd As IntPtr) As IntPtr
-    End Function
-
-    <DllImport("user32.dll")>
-    Public Shared Function ReleaseDC(ByVal hWnd As IntPtr, ByVal hDC As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
-    End Function
-
     Public Overloads Declare Function InvalidateRect Lib "User32" Alias "InvalidateRect" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
 
     Dim hwnd As IntPtr
