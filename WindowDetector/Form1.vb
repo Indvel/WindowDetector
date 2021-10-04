@@ -50,8 +50,8 @@ Public Class Form1
     Public Overloads Declare Function InvalidateRect Lib "User32" Alias "InvalidateRect" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
 
     Dim hwnd As IntPtr
+    Dim prevHwnd As IntPtr
     Dim stroke As Pen = New Pen(Color.Red, 2)
-    Dim prevPid As Integer = Nothing
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -81,8 +81,8 @@ Public Class Form1
             Dim rect As RECT
             GetWindowRect(hwnd, rect)
 
-            If Not pid = prevPid Then
-                prevPid = pid
+            If Not hwnd = prevHwnd Then
+                prevHwnd = hwnd
                 InvalidateRect(IntPtr.Zero, rect, False)
             End If
 
