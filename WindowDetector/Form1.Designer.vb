@@ -35,7 +35,7 @@ Partial Class Form1
         'btnStart
         '
         Me.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnStart.Location = New System.Drawing.Point(75, 113)
+        Me.btnStart.Location = New System.Drawing.Point(73, 113)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(87, 31)
         Me.btnStart.TabIndex = 1
@@ -45,7 +45,7 @@ Partial Class Form1
         'btnStop
         '
         Me.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnStop.Location = New System.Drawing.Point(168, 113)
+        Me.btnStop.Location = New System.Drawing.Point(166, 113)
         Me.btnStop.Name = "btnStop"
         Me.btnStop.Size = New System.Drawing.Size(87, 31)
         Me.btnStop.TabIndex = 1

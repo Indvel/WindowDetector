@@ -80,9 +80,10 @@ Public Class Form1
 
             Dim rect As RECT
             GetWindowRect(hwnd, rect)
+
             If Not pid = prevPid Then
                 prevPid = pid
-                InvalidateRect(IntPtr.Zero, rect, True)
+                InvalidateRect(IntPtr.Zero, rect, False)
             End If
 
             Dim rta As Rectangle = New Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
