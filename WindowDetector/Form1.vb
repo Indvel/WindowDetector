@@ -1,10 +1,10 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Text
-Imports System.Drawing
+Imports System.Threading
 
 Public Class Form1
 
-    <DllImport("user32")>
+    <DllImport("user32.dll")>
     Public Shared Function WindowFromPoint(pt As Point) As IntPtr
     End Function
 
@@ -12,7 +12,7 @@ Public Class Form1
     Private Shared Function GetWindowThreadProcessId(<InAttribute()> ByVal hWnd As IntPtr, ByRef lpdwProcessId As Integer) As Integer
     End Function
 
-    <DllImport("user32")>
+    <DllImport("user32.dll")>
     Private Shared Function GetCursorPos(ByRef pt As Point) As Int32
     End Function
 
@@ -31,9 +31,9 @@ Public Class Form1
         Public bottom As Integer
     End Structure
 
-    Declare Function GetWindowRect Lib "user32" Alias "GetWindowRect" (ByVal hwnd As Integer, ByRef lpRect As RECT) As Integer
+    Declare Function GetWindowRect Lib "user32.dll" Alias "GetWindowRect" (ByVal hwnd As Integer, ByRef lpRect As RECT) As Integer
 
-    Public Overloads Declare Function InvalidateRect Lib "User32" Alias "InvalidateRect" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
+    Public Overloads Declare Function InvalidateRect Lib "user32.dll" Alias "InvalidateRect" (ByVal hWnd As IntPtr, ByRef lpRect As RECT, ByVal bErase As Boolean) As Boolean
 
     Dim hwnd As IntPtr
     Dim prevHwnd As IntPtr
@@ -49,7 +49,7 @@ Public Class Form1
 
         If hwnd <> IntPtr.Zero Then
             Dim len As Integer = GetWindowTextLength(hwnd)
-            Dim title As New StringBuilder("", len + 1)
+            Dim title As New StringBuilder("None", len + 1)
             If len > 0 Then
                 GetWindowText(hwnd, title, title.Capacity)
             End If
@@ -72,9 +72,17 @@ Public Class Form1
                 InvalidateRect(IntPtr.Zero, rect, False)
             End If
 
+            Dim font As Font
+            If Thread.CurrentThread.CurrentCulture.Name = "ko-KR" Then
+                font = New Font("맑은 고딕", 10)
+            Else
+                font = New Font("Arial", 10)
+            End If
+
             Dim rta As Rectangle = New Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top)
             Dim g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
             g.DrawRectangle(stroke, rta)
+            g.DrawString(title.ToString & " (" & (rect.right - rect.left) & " X " & (rect.bottom - rect.top) & ")", font, Brushes.Red, New Point(rect.left, rect.top - 18))
             g.Dispose()
 
             labelId.Text = "ProcessID : " & pid.ToString
