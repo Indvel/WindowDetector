@@ -87,12 +87,14 @@ Public Class Form1
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         If Timer1.Enabled = False Then
             Timer1.Enabled = True
+            Me.TopMost = True
         End If
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
         If Timer1.Enabled Then
             Timer1.Enabled = False
+            Me.TopMost = False
         End If
     End Sub
 End Class
